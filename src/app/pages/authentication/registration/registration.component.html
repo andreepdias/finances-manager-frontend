@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 ml-auto mr-auto">
         <div class="card card-login">
-        <form class="form" method="" action="">
+        <form [formGroup]="form" class="form" method="" action="">
             <div class="card-header card-header-primary text-center">
                 <p><i class="pe-7s-piggy" style="font-size: large;"></i>
                     My Money
@@ -12,13 +12,14 @@
               <h3 class="card-title">Registration</h3>
             </div>
             <div class="card-body">
+            
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="material-icons">face</i>
                   </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Full name...">
+                <input formControlName="name" type="text" class="form-control" placeholder="Full name...">
               </div>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -26,7 +27,7 @@
                     <i class="material-icons">mail</i>
                   </span>
                 </div>
-                <input type="email" class="form-control" placeholder="Email...">
+                <input formControlName="email" type="email" class="form-control" placeholder="Email...">
               </div>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -34,14 +35,23 @@
                     <i class="material-icons">lock_outline</i>
                   </span>
                 </div>
-                <input type="password" class="form-control" placeholder="Password...">
+                <input formControlName="password" type="password" class="form-control" placeholder="Password...">
               </div>
             </div>
-            <div class="footer text-center">
-              <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">GET STARTED</a>
+            
+            <!-- Pos Submit Messages -->
+            <div *ngIf="successMessage">
+              <br><div class="text-success alert-success text-center" role="alert">{{ successMessage }}</div>
             </div>
-            <br>
-            <p class="description text-center">Already have an account? <a routerLink="/login">LOG IN.</a></p>
+            <div *ngIf="errorMessages">
+              <br><div class="text-danger alert-danger text-center" role="alert" *ngFor="let message of errorMessages">{{ message }}</div>
+            </div>
+            
+            <div class="footer text-center">
+              <a (click)="submitForm()" class="btn btn-primary btn-link btn-wd btn-lg">GET STARTED</a  >
+            </div>
+            
+            <p class="description text-center">Already have an account? <a routerLink="/login">LOG IN</a>.</p>
           </form>
         </div>
       </div>
