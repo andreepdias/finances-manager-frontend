@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <app-page-header
+            [page-title]="pageTitle"
+            [page-description]="pageDescription"
+            button-link="/categories"
+            ></app-page-header>
+
+            <div class="card-body">
+                <form [formGroup]="resourceForm" (submit)="submitForm()">
+                    <div class="row">
+
+                        <!-- name -->
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input formControlName="name" id="name" type="text" class="form-control">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
+                        </div>                        
+                    </div>
+
+                    <div class="row">
+                        <!-- description -->
+                        <div class="form-group col-md-6">
+                            <label for="description">Description</label>
+                            <input formControlName="description" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- type -->
+                        <div class="form-group col-md-6">
+                            <label for="Tipo">Type</label>
+                            <select formControlName="categoryTypeCode" class="form-control">
+                                <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.text }}</option>
+                            </select>
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.categoryTypeCode"></app-form-filed-error>
+                        </div>
+                    </div>
+
+                    <app-server-error-messages></app-server-error-messages>
+
+                    <div class="row">
+                        <div class="col-md-6 text-right">
+                            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
+                                {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

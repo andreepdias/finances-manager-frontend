@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+
+            <app-page-header
+            page-title="Categories"
+            page-description="List of all categories that a transaction can be part with."
+            button-link="/categories/new"
+            button-class="btn-danger"
+            button-icon="add_circle"
+            button-text="New Category"
+            ></app-page-header>
+            
+            <div class="card-body table-full-width table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let category of resources | paginate: paginationConfig">
+                            <td>
+                                <span>{{ category.name }}</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">{{ category.description }}</span>
+                            </td>
+                            <td>
+                                <span [class.text-success]="category.categoryTypeName == 'Income'" [class.text-warning]="category.categoryTypeName == 'Expense'">
+                                    {{ category.categoryTypeName }}
+                                </span>
+                            </td>
+                            <td class="td-actions">
+                                <button routerLink="/categories/{{ category.id }}/edit" class="btn  btn-rose btn-fab btn-fab-mini btn-round">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <button (click)="deleteResource(category)" class="btn btn-fab btn-fab-mini btn-round ml-1">
+                                    <i class="material-icons">delete</i>
+                                  </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <app-pagination
+                [pagination-config]="paginationConfig"
+                (on-change-page-event)="onPaginationPageChange($event)"
+                ></app-pagination>
+            </div>
+        </div>
+    </div>
+</div>

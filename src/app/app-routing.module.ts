@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
-import { LoginComponent } from './pages/authentication/login/login.component';
-import { LayoutComponent } from './template/layout/layout.component';
-import { TransactionsListComponent } from './pages/transactions/transactions-list/transactions-list.component';
+import { LayoutComponent } from './core/components/layout/layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { CategoryListComponent } from './pages/categories/category-list/category-list.component';
+import { TransactionListComponent } from './pages/transactions/transaction-list/transaction-list.component';
+import { WalletsListComponent } from './pages/wallets/wallets-list/wallets-list.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
   { path: '', component: LayoutComponent, canActivate: [ AuthGuard ], children: [
-    { path: 'transactions', component: TransactionsListComponent },
-    { path: '', redirectTo: '/transactions', pathMatch: 'full' }
-  ]},
+    { path: '', redirectTo: '/categories/list', pathMatch: 'full' }
+  ] }
 ];
 
 @NgModule({

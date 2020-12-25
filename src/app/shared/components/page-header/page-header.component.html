@@ -1,0 +1,13 @@
+<div class="card-header">
+    <div class="row">
+        <div class="col-md">
+            <h4 class="card-title">{{ pageTitle }}</h4>
+            <p class="card-category">{{ pageDescription }}</p>
+        </div>
+        <div *ngIf="showButton" class="col-md text-right">
+            <button [routerLink]="buttonLink" class="btn btn-round" [ngClass]="buttonClass">
+                <i class="material-icons">{{ buttonIcon }}</i> {{ buttonText }}
+            </button>
+        </div>
+    </div>
+</div>
