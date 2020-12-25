@@ -9,6 +9,7 @@ import { ServerErrorMessagesComponent } from './components/server-error-messages
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { IMaskModule } from 'angular-imask';
 
 
 
@@ -33,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule,
+    IMaskModule,
     
     ServerErrorMessagesComponent,
     FormFiledErrorComponent,

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { BaseResourceModel } from '../../models/base-resource.model';
-import { BaseResourceServiceService } from '../../services/base-resource-service.service';
+import { BaseResourceService } from '../../services/base-resource-service.service';
 declare var $:any;
 
 @Directive()
@@ -19,6 +19,15 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   currentAction: string = '';
   submittingForm: boolean = false;
 
+  imaskConfig: any = {
+    mask: Number,
+    scale: 2,
+    thousandsSeparator: '',
+    padFractionalZeros: true,
+    normalizeZeros: true,
+    radix: ','
+  };
+
   protected route: ActivatedRoute;
   protected router: Router;
   protected formBuilder: FormBuilder;
@@ -26,7 +35,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   constructor(
     protected resource: T,
-    protected service: BaseResourceServiceService<T>,
+    protected service: BaseResourceService<T>,
     protected jsonToResourceFn: (jsonData: any) => T,
     protected injector: Injector
   ){
@@ -74,6 +83,13 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     this.serverErrorMessages = error.error.errors;
   }
 
+  get notificationSuccessIcon(): string{
+    return (this.currentAction == 'new') ? 'pe-7s-check' : 'pe-7s-pen';
+  }
+
+  get notificationErrorIcon(): string{
+    return 'pe-7s-close-circle';
+  }
   
   protected abstract buildForm(): any;
 

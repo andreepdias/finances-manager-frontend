@@ -1,1 +1,52 @@
-<p>transaction-list works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+
+            <app-page-header
+            page-title="Transactions"
+            page-description="List of all transactions you've done."
+            button-link="/transactions/new"
+            button-class="btn-danger"
+            button-icon="add_circle"
+            button-text="New Transaction"
+            ></app-page-header>
+            
+            <div class="card-body table-full-width table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Name</th>
+                        <th class="text-right">Amount</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Wallet</th>
+                        <th class="text-right">Actions</th>
+                        <th>&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of resources | paginate: paginationConfig">
+                            <td><span>{{ transaction.name }}</span></td>   
+                            <td class="text-right"><span>{{ transaction.amount | imask:imaskConfig }}</span></td>
+                            <td class="text-center"><span>{{ transaction.description }}</span></td>
+                            <td class="text-center"><span>{{ transaction.category.name }}</span></td>
+                            <td class="text-center"><span>{{ transaction.wallet.name }}</span></td>
+                            <td class="td-actions text-right">
+                                <button routerLink="/transactions/{{ transaction.id }}/edit" class="btn  btn-rose btn-fab btn-fab-mini btn-round">
+                                    <i class="material-icons">edit</i>
+                                  </button>
+                                  <button (click)="deleteResource(transaction)" class="btn btn-fab btn-fab-mini btn-round ml-1">
+                                    <i class="material-icons">delete</i>
+                                  </button>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <app-pagination
+                [pagination-config]="paginationConfig"
+                (on-change-page-event)="onPaginationPageChange($event)"
+                ></app-pagination>
+            </div>
+        </div>
+    </div>
+</div>

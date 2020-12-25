@@ -17,7 +17,8 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Type</th>
-                        <th>Actions</th>
+                        <th class="text-right">Actions</th>
+                        <th>&nbsp;</th>
                     </thead>
                     <tbody>
                         <tr *ngFor="let category of resources | paginate: paginationConfig">
@@ -32,7 +33,7 @@
                                     {{ category.categoryTypeName }}
                                 </span>
                             </td>
-                            <td class="td-actions">
+                            <td class="td-actions text-right">
                                 <button routerLink="/categories/{{ category.id }}/edit" class="btn  btn-rose btn-fab btn-fab-mini btn-round">
                                     <i class="material-icons">edit</i>
                                   </button>
@@ -40,6 +41,7 @@
                                     <i class="material-icons">delete</i>
                                   </button>
                             </td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>

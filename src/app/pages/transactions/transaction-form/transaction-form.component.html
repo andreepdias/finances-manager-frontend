@@ -1,1 +1,74 @@
-<p>transaction-form works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <app-page-header
+            [page-title]="pageTitle"
+            [page-description]="pageDescription"
+            button-link="/transactions"
+            ></app-page-header>
+
+            <div class="card-body">
+                <form [formGroup]="resourceForm" (submit)="submitForm()">
+                    <div class="row">
+                        <!-- name -->
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input formControlName="name" id="name" type="text" class="form-control">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <!-- description -->
+                        <div class="form-group col-md-6">
+                            <label for="description">Description</label>
+                            <input formControlName="description" id="description" type="text" class="form-control">
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <!-- amount -->
+                        <div class="form-group col-md-6">
+                            <label for="amount">Amount</label>
+                            <input [imask]="imaskConfig" formControlName="amount" type="text" class="form-control text-right">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.amount"></app-form-filed-error>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- category -->
+                        <div class="form-group col-md-6">
+                            <label for="Tipo">Category</label>
+                            <select formControlName="categoryId" class="form-control">
+                                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                            </select>
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.categoryId"></app-form-filed-error>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- wallet -->
+                        <div class="form-group col-md-6">
+                            <label for="Tipo">Wallet</label>
+                            <select formControlName="walletId" class="form-control">
+                                <option *ngFor="let wallet of wallets" [value]="wallet.id">{{ wallet.name }}</option>
+                            </select>
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.walletId"></app-form-filed-error>
+                        </div>
+                    </div>
+
+                    <app-server-error-messages></app-server-error-messages>
+
+                    <div class="row">
+                        <div class="col-md-6 text-right">
+                            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
+                                {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

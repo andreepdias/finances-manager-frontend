@@ -18,7 +18,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> i
     protected service: CategoryService,
     protected injector: Injector
   ) {
-    super(new Category(), service, Category.fromJson, injector);
+    super(new Category(), service, Category.fromJSON, injector);
   }
 
   protected buildForm(){
@@ -45,8 +45,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> i
     const message: string = (this.currentAction == 'new') ? 
       'Success creating a new category ' + category.name + '!' : 
       'Success editing category ' + category.name + '!';
-    const icon: string = (this.currentAction == 'new') ? 'pe-7s-check' : 'pe-7s-pen';
-    Notification.showNotification(message, icon, 'info', 'top', 'center');
+    Notification.showNotification(message, this.notificationSuccessIcon, 'info', 'top', 'center');
 
     super.actionsForSuccess(category);
   }
@@ -55,8 +54,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> i
     const message: string = (this.currentAction == 'new') ? 
     'Error creating a new category.' : 
     'Error editing this category.';
-    const icon: string = 'pe-7s-close-circle';
-    Notification.showNotification(message, icon, 'danger', 'top', 'center');
+    Notification.showNotification(message, this.notificationErrorIcon, 'danger', 'top', 'center');
 
     super.actionsForError(error);
   }

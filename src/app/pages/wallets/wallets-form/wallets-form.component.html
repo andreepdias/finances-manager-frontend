@@ -1,1 +1,47 @@
-<p>wallets-form works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <app-page-header
+            [page-title]="pageTitle"
+            [page-description]="pageDescription"
+            button-link="/wallets"
+            ></app-page-header>
+
+            <div class="card-body">
+                <form [formGroup]="resourceForm" (submit)="submitForm()">
+                    <div class="row">
+                        <!-- name -->
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input formControlName="name" id="name" type="text" class="form-control">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <!-- amount -->
+                        <div class="form-group col-md-6">
+                            <label for="amount">
+                                {{ this.currentAction == 'new' ? 'Initial amount' : 'Amount' }}
+                            </label>
+                            <input [imask]="imaskConfig" formControlName="amount" type="text" class="form-control text-right">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.amount"></app-form-filed-error>
+                        </div>
+                    </div>
+
+                    <app-server-error-messages></app-server-error-messages>
+
+                    <div class="row">
+                        <div class="col-md-6 text-right">
+                            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
+                                {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,17 +5,17 @@ import { Category } from './category.model';
 
 import { catchError, map } from "rxjs/operators";
 import { throwError } from "rxjs";
-import { BaseResourceServiceService } from 'src/app/shared/services/base-resource-service.service';
+import { BaseResourceService } from 'src/app/shared/services/base-resource-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends BaseResourceServiceService<Category>{
+export class CategoryService extends BaseResourceService<Category>{
 
   constructor(
     protected injector: Injector
   ){
-    super('categories', injector, Category.fromJson);
+    super('categories', injector, Category.fromJSON);
   }
 
 }

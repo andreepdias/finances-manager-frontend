@@ -1,6 +1,7 @@
 import { Component, Directive, OnInit } from '@angular/core';
 import { BaseResourceModel } from '../../models/base-resource.model';
-import { BaseResourceServiceService } from '../../services/base-resource-service.service';
+import { Notification } from '../../scripts/notification';
+import { BaseResourceService } from '../../services/base-resource-service.service';
 declare var $:any;
 
 @Directive()
@@ -15,8 +16,17 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     currentPage: 1
   };
 
+  imaskConfig: any = {
+    mask: Number,
+    scale: 2,
+    thousandsSeparator: '',
+    padFractionalZeros: true,
+    normalizeZeros: true,
+    radix: ','
+  };
+
   constructor(
-    protected service: BaseResourceServiceService<T>
+    protected service: BaseResourceService<T>
   ) { }
 
   ngOnInit(): void {
@@ -25,8 +35,8 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
 
   deleteResource(resource: T){
     this.service.delete(resource).subscribe(
-      () => this.handleSuccessfulDeletion(resource),
-      (error) => console.log('Error deleting resource: ', error)
+      () => this.actionsForSuccessDelete(resource),
+      (error) => this.actionsForFailedDelete(error)
     );
   }
   
@@ -47,8 +57,16 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     )
   }
 
-  protected handleSuccessfulDeletion(resource: T){
+  protected actionsForSuccessDelete(resource: T){
     this.loadPageResources(this.paginationConfig.currentPage - 1, this.paginationConfig.itemsPerPage);
+  }
+
+  protected actionsForFailedDelete(error: any){
+    const errorMessages = error.error.errors;
+
+    for(let error of errorMessages){
+      Notification.showNotification(error, 'pe-7s-close-circle', 'danger', 'top', 'center');
+    }
   }
 
 }

@@ -4,3 +4,9 @@
   box-shadow: none;
   cursor: initial;
 }
+
+.card .table tbody td:last-child,
+.card .table thead th:last-child {
+    padding-right: 15px;
+    display: flex;
+}

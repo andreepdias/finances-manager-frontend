@@ -16,17 +16,21 @@ export class CategoryListComponent extends BaseResourceListComponent<Category> i
     protected service: CategoryService
   ){
     super(service);
-    this.configurePagination();
   }
 
-  configurePagination(){
-    this.paginationConfig.id = 'categories-list-component';
+  ngOnInit(){
+    super.ngOnInit();
+    this.configurePagination();    
   }
   
-  protected handleSuccessfulDeletion(category: Category){
-    Notification.showNotification('Category ' + category.name + ' was removed.', 'pe-7s-trash', 'info', 'top', 'center');
+  protected actionsForSuccessDelete(resource: Category){
+    Notification.showNotification('Category ' + resource.name + ' was removed.', 'pe-7s-trash', 'info', 'top', 'center');
     
-    super.handleSuccessfulDeletion(category);
+    super.actionsForSuccessDelete(resource);
+  }
+
+  private configurePagination(){
+    this.paginationConfig.id = 'categories-list-component';
   }
 
 }

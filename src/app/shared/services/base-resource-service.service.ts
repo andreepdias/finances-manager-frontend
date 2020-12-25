@@ -6,7 +6,7 @@ import { map, catchError } from "rxjs/operators";
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export class BaseResourceServiceService<T extends BaseResourceModel> {
+export class BaseResourceService<T extends BaseResourceModel> {
 
   protected http: HttpClient;
 
@@ -21,12 +21,12 @@ export class BaseResourceServiceService<T extends BaseResourceModel> {
     this.apiURL += '/' + apiPath;
   }
 
-  // getAll(){
-  //   return this.http.get(this.apiURL).pipe(
-  //     catchError(this.handleError),
-  //     map(this.jsonPageToResources.bind(this))
-  //   );
-  // }
+  getAll(){
+    return this.http.get(`${this.apiURL}/all`).pipe(
+      catchError(this.handleError),
+      map(this.jsonToResources.bind(this))
+    );
+  }
 
   getPage(page: number = 0, size: number = 0){
     const params = new HttpParams().set('page', String(page)).set('size', String(size) );
@@ -70,6 +70,15 @@ export class BaseResourceServiceService<T extends BaseResourceModel> {
 
   private jsonToResource(jsonData: any){
     return this.jsonToResourceFn(jsonData);
+  }
+
+  private jsonToResources(json: any){
+    const resources: T[] = [];
+    console.log('Converting to model: ', json);
+    json.forEach(
+      (element: T) => resources.push(element)
+    );
+    return resources;
   }
 
   private jsonPageToResources(jsonPage: any){

@@ -10,7 +10,7 @@ export class Category {
         2: 'Income'
     };
 
-    static fromJson(json: any): Category{
+    static fromJSON(json: any): Category{
         return Object.assign(new Category(), json);
     }
 }

@@ -2323,7 +2323,6 @@ Copyright (c) 2015 Daniel Eden
 .card .table thead th:last-child {
     padding-right: 15px;
     display: inline-flex;
-    text-align: right;
 }
 
 .card .alert {
