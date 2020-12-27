@@ -25,7 +25,7 @@
                                 <span>{{ wallet.name }}</span>
                             </td>   
                             <td class="text-right">
-                                <span>{{ wallet.amount | imask:imaskConfig }}</span>
+                                <span>{{ currencyUtil.format(wallet.amount) }}</span>
                             </td>
                             <td class="td-actions text-right">
                                 <button routerLink="/wallets/{{ wallet.id }}/edit" class="btn  btn-rose btn-fab btn-fab-mini btn-round">

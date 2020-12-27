@@ -15,6 +15,7 @@ declare interface MenuRouteInfo {
 export class SidebarComponent implements OnInit {
 
   menuRoutes: MenuRouteInfo[] = [
+    { path: '/reports', title: 'Reports', icon: 'pe-7s-graph1', class: '' },
     { path: '/transactions', title: 'Transactions', icon: 'nc-icon nc-money-coins', class: '' },
     { path: '/wallets', title: 'Wallets', icon: 'pe-7s-wallet', class: '' },
     { path: '/categories', title: 'Categories', icon: 'nc-icon nc-bullet-list-67', class: '' }

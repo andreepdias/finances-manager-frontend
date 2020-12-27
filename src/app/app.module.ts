@@ -8,6 +8,7 @@ import { AuthenticationModule } from './pages/authentication/authentication.modu
 import { AuthService } from './core/services/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { ReportsModule } from './pages/reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    AuthenticationModule
+    AuthenticationModule,
+    ReportsModule
   ],
   providers: [
     AuthService,

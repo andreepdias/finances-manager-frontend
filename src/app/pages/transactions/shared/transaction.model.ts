@@ -7,6 +7,7 @@ export class Transaction extends BaseResourceModel{
     name: string = '';
     description: string = '';
     amount: string = '';
+    date: string = '';
     
     categoryId: number = 0;
     category: Category = new Category();

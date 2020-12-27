@@ -17,38 +17,27 @@
                             <input formControlName="name" id="name" type="text" class="form-control">
 
                             <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
-                        </div>                        
-                    </div>
-                    <div class="row">
+                        </div>        
+
                         <!-- description -->
-                        <div class="form-group col-md-6">
+                        <div class="col-md-6">
                             <label for="description">Description</label>
                             <input formControlName="description" id="description" type="text" class="form-control">
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <!-- amount -->
-                        <div class="form-group col-md-6">
-                            <label for="amount">Amount</label>
-                            <input [imask]="imaskConfig" formControlName="amount" type="text" class="form-control text-right">
-
-                            <app-form-filed-error [form-control]="resourceForm.controls.amount"></app-form-filed-error>
-                        </div>
+                        </div>                
                     </div>
                     <div class="row">
                         <!-- category -->
-                        <div class="form-group col-md-6">
-                            <label for="Tipo">Category</label>
+                        <div class="form-group col-md-4">
+                            <label for="categoryId">Category</label>
                             <select formControlName="categoryId" class="form-control">
                                 <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
                             </select>
 
                             <app-form-filed-error [form-control]="resourceForm.controls.categoryId"></app-form-filed-error>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <!-- wallet -->
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="Tipo">Wallet</label>
                             <select formControlName="walletId" class="form-control">
                                 <option *ngFor="let wallet of wallets" [value]="wallet.id">{{ wallet.name }}</option>
@@ -56,12 +45,36 @@
 
                             <app-form-filed-error [form-control]="resourceForm.controls.walletId"></app-form-filed-error>
                         </div>
+
+                        <!-- amount -->
+                        <div class="form-group col-md-2">
+                            <label for="amount">Amount</label>
+                            <input [imask]="imaskConfig" formControlName="amount" type="text" class="form-control text-right">
+
+                            <app-form-filed-error [form-control]="resourceForm.controls.amount"></app-form-filed-error>
+                        </div>
+
+                        <!-- date -->
+                        <div class="form-group col-md-2">
+                            <label for="date">Date</label>
+                            <p-calendar id="date" 
+                            [(ngModel)]="defaultDate"
+                            formControlName="date" 
+                            inputStyleClass="form-control text-right"
+                            [style]="{'width':'100%'}" 
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [showButtonBar]="true">
+                            </p-calendar><br>
+                            
+                            <app-form-filed-error [form-control]="resourceForm.controls.date"></app-form-filed-error>
+                        </div>
                     </div>
 
                     <app-server-error-messages></app-server-error-messages>
 
                     <div class="row">
-                        <div class="col-md-6 text-right">
+                        <div class="col-md text-left">
                             <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
                                 {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
                             </button>

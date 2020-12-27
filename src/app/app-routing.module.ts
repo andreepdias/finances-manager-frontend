@@ -8,7 +8,7 @@ import { WalletsListComponent } from './pages/wallets/wallets-list/wallets-list.
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, canActivate: [ AuthGuard ], children: [
-    { path: '', redirectTo: '/categories/list', pathMatch: 'full' }
+    { path: '', redirectTo: '/reports', pathMatch: 'full' }
   ] }
 ];
 

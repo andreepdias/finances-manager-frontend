@@ -2,6 +2,8 @@ import { Component, Directive, OnInit } from '@angular/core';
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { Notification } from '../../scripts/notification';
 import { BaseResourceService } from '../../services/base-resource-service.service';
+import { CurrencyUtil } from '../../util/currency.util';
+
 declare var $:any;
 
 @Directive()
@@ -16,14 +18,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     currentPage: 1
   };
 
-  imaskConfig: any = {
-    mask: Number,
-    scale: 2,
-    thousandsSeparator: '',
-    padFractionalZeros: true,
-    normalizeZeros: true,
-    radix: ','
-  };
+  currencyUtil: CurrencyUtil = new CurrencyUtil();
 
   constructor(
     protected service: BaseResourceService<T>
@@ -44,6 +39,18 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
     this.loadPageResources(event - 1, this.paginationConfig.itemsPerPage);
   }
 
+  protected actionsForSuccessDelete(resource: T){
+    this.loadPageResources(this.paginationConfig.currentPage - 1, this.paginationConfig.itemsPerPage);
+  }
+
+  protected actionsForFailedDelete(error: any){
+    const errorMessages = error.error.errors;
+
+    for(let error of errorMessages){
+      Notification.showNotification(error, 'pe-7s-close-circle', 'danger', 'top', 'center');
+    }
+  }
+
 
   /** --- PRIVATE METHODS  --- */
 
@@ -55,18 +62,6 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
         this.paginationConfig.totalItems = jsonPage.totalElements;
       }
     )
-  }
-
-  protected actionsForSuccessDelete(resource: T){
-    this.loadPageResources(this.paginationConfig.currentPage - 1, this.paginationConfig.itemsPerPage);
-  }
-
-  protected actionsForFailedDelete(error: any){
-    const errorMessages = error.error.errors;
-
-    for(let error of errorMessages){
-      Notification.showNotification(error, 'pe-7s-close-circle', 'danger', 'top', 'center');
-    }
   }
 
 }

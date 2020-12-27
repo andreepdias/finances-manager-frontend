@@ -12,16 +12,15 @@
                 <form [formGroup]="resourceForm" (submit)="submitForm()">
                     <div class="row">
                         <!-- name -->
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-8">
                             <label for="name">Name</label>
                             <input formControlName="name" id="name" type="text" class="form-control">
 
                             <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
-                        </div>                        
-                    </div>
-                    <div class="row">
+                        </div>
+
                         <!-- amount -->
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="amount">
                                 {{ this.currentAction == 'new' ? 'Initial amount' : 'Amount' }}
                             </label>
@@ -34,7 +33,7 @@
                     <app-server-error-messages></app-server-error-messages>
 
                     <div class="row">
-                        <div class="col-md-6 text-right">
+                        <div class="col-md text-left">
                             <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
                                 {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
                             </button>

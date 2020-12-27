@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource-service.service';
+
 declare var $:any;
 
 @Directive()
@@ -64,18 +65,37 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
   }
 
+  protected createResource(){
+    const resource: T = this.jsonToResourceFn(this.resourceForm.value);
+    
+    return this.service.create(resource).subscribe(
+      resource => this.actionsForSuccess(resource),
+      error => this.actionsForError(error)
+    )
+  }
+
+  protected updateResource(){
+    const resource: T = this.jsonToResourceFn(this.resourceForm.value);
+
+    return this.service.update(resource).subscribe(
+      resource => this.actionsForSuccess(resource),
+      error => this.actionsForError(error)
+    );
+  }
+
   protected actionsForSuccess(resource: T){
     const baseComponentPath: string = (this.route.snapshot.parent) ? this.route.snapshot.parent.url[0].path : '';
 
     if(baseComponentPath){
-      if(this.currentAction == 'new'){
-        this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
-          () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
-        );
-      }else{
-        this.router.navigateByUrl(baseComponentPath);
-      }
+      this.router.navigateByUrl(baseComponentPath);
     }
+      // if(this.currentAction == 'new'){
+      //   this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
+      //     () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
+      //   );
+      // }else{
+      //   this.router.navigateByUrl(baseComponentPath);
+      // }
   }
 
   protected actionsForError(error: any){
@@ -89,6 +109,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   get notificationErrorIcon(): string{
     return 'pe-7s-close-circle';
+  }
+
+  protected unformatCurrency(amount: string){
+    return amount.replace(',', '.');
   }
   
   protected abstract buildForm(): any;
@@ -117,24 +141,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         error => console.log('Error loading resource: ', error)
       );
     }
-  }
-
-  private createResource(){
-    const resource: T = this.jsonToResourceFn(this.resourceForm.value);
-    
-    return this.service.create(resource).subscribe(
-      resource => this.actionsForSuccess(resource),
-      error => this.actionsForError(error)
-    )
-  }
-
-  private updateResource(){
-    const resource: T = this.jsonToResourceFn(this.resourceForm.value);
-
-    return this.service.update(resource).subscribe(
-      resource => this.actionsForSuccess(resource),
-      error => this.actionsForError(error)
-    );
   }
 
 

@@ -8,6 +8,7 @@ import { Wallet } from '../../wallets/shared/wallet.model';
 import { WalletService } from '../../wallets/shared/wallet.service';
 import { Transaction } from '../shared/transaction.model';
 import { TransactionService } from '../shared/transaction.service';
+declare var $:any;
 
 @Component({
   selector: 'app-transaction-form',
@@ -18,6 +19,8 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
 
   categories: Category[] = [];
   wallets: Wallet[] = [];
+  
+  defaultDate: string = '';
 
   constructor(
     protected injector: Injector,
@@ -32,6 +35,19 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
     super.ngOnInit();
     this.loadCategories();
     this.loadWallets();
+    this.setDefaultDate();
+  }
+
+  protected buildForm(){
+    this.resourceForm = this.formBuilder.group({
+      id: [ null ],
+      name: [ null, [ Validators.required ] ],
+      description: [ null ],
+      amount: [ null, [ Validators.required ] ],
+      categoryId: [ null, [ Validators.required ] ],
+      walletId: [ null, [ Validators.required ] ],
+      date: [ null, [ Validators.required ] ],
+    })
   }
 
   private loadCategories(){
@@ -48,6 +64,11 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
     );
   }
 
+  private setDefaultDate(){
+    let today = new Date();
+    this.defaultDate = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+  }
+
   protected setPageTitle(){
     if(this.currentAction == 'new'){
       this.pageTitle = 'New transaction';
@@ -58,15 +79,14 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
     }
   }
 
-  protected buildForm(){
-    this.resourceForm = this.formBuilder.group({
-      id: [ null ],
-      name: [ null, [ Validators.required ] ],
-      description: [ null ],
-      amount: [ null, [ Validators.required ] ],
-      categoryId: [ null, [ Validators.required ] ],
-      walletId: [ null, [ Validators.required ] ],
-    })
+  protected createResource(){
+    this.resourceForm.value.amount = this.unformatCurrency(this.resourceForm.value.amount);
+    return super.createResource();
+  }
+
+  protected updateResource(){
+    this.resourceForm.value.amount = this.unformatCurrency(this.resourceForm.value.amount);
+    return super.updateResource();
   }
 
   protected actionsForSuccess(transaction: Transaction){
@@ -87,6 +107,4 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
 
     super.actionsForError(error);
   }
-
-
 }

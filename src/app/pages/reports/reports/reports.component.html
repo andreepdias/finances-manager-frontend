@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+
+            <app-page-header
+            page-title="Reports"
+            page-description="Track your finances expenses and incomes."
+            [show-button]="false"></app-page-header>
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md text-center">
+                        <label for="monthyear">Choose a month: &nbsp;</label>
+                            <p-calendar id="date" name="date"
+                            view="month" 
+                            dataType="string"
+                            dateFormat="mm/yy" 
+                            yearRange="2000:2030"
+                            inputStyleClass="text-right"
+                            [yearNavigator]="true" 
+                            [readonlyInput]="true"
+                            [(ngModel)]="defaultDate"
+                            [style]="{'width':'10%'}" 
+                            (onSelect)="changeMonth($event)"
+                            ></p-calendar>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        
+                        <div class="card-deck mt-5 mb-3 text-center">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">Total Incomes</span>
+                                </div>
+                                <div class="card-body">
+                                    <span [class.text-success]="totalIncomes > 0">{{ currencyUtil.format(totalIncomes+'') }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">Total Expenses</span>
+                                </div>
+                                <div class="card-body">
+                                    <span [class.text-danger]="totalExpenses > 0">{{ currencyUtil.format(totalExpenses+'') }}</span>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">Balance</span>
+                                </div>
+                                <div class="card-body">
+                                    <span 
+                                    [class.text-success]="finalBalance > 0"
+                                    [class.text-danger]="finalBalance < 0">{{ currencyUtil.format(finalBalance+'') }}</span>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md">
+
+                        <ul class="nav nav-pills justify-content-center mb-5 mt-3">
+                            <li class="nav-item"><a class="nav-link active" href="#pill1" data-toggle="tab">Expenses</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">Incomes</a></li>
+                        </ul>
+
+                        <div class="tab-content tab-space">
+                            <div class="tab-pane active" id="pill1">
+                                <div *ngIf="reportsConfig.expensesChartData.datasets[0].data.length">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p-chart
+                                            type="pie" 
+                                            height="350px"
+                                            [data]="reportsConfig.expensesChartData"
+                                            [options]="reportsConfig.pieChartOptions"
+                                            ></p-chart>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p-chart type="bar"
+                                            [data]="reportsConfig.expensesChartData"
+                                            [options]="reportsConfig.barChartOptions"
+                                            height="350px"
+                                            width="450px"
+                                            ></p-chart>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="!reportsConfig.expensesChartData.datasets[0].data.length">
+                                    <h3 class="text-center">You did not record any expense this month.</h3>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="pill2">
+                                <div *ngIf="reportsConfig.incomesChartData.datasets[0].data.length">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p-chart
+                                            type="pie" 
+                                            height="350px"
+                                            [data]="reportsConfig.incomesChartData"
+                                            [options]="reportsConfig.pieChartOptions"
+                                            ></p-chart>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p-chart type="bar"
+                                            [data]="reportsConfig.incomesChartData"
+                                            [options]="reportsConfig.barChartOptions"
+                                            height="350px"
+                                            width="450px"
+                                            ></p-chart>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="!reportsConfig.incomesChartData.datasets[0].data.length">
+                                    <h3 class="text-center">You did not record any income this month.</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

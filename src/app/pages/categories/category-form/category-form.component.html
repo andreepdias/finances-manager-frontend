@@ -18,10 +18,8 @@
                             <input formControlName="name" id="name" type="text" class="form-control">
 
                             <app-form-filed-error [form-control]="resourceForm.controls.name"></app-form-filed-error>
-                        </div>                        
-                    </div>
+                        </div>
 
-                    <div class="row">
                         <!-- description -->
                         <div class="form-group col-md-6">
                             <label for="description">Description</label>
@@ -32,9 +30,9 @@
                     <div class="row">
                         <!-- type -->
                         <div class="form-group col-md-6">
-                            <label for="Tipo">Type</label>
+                            <label for="categoryTypeCode">Type</label>
                             <select formControlName="categoryTypeCode" class="form-control">
-                                <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.text }}</option>
+                                <option *ngFor="let option of categoryTypes" [value]="option.value">{{ option.text }}</option>
                             </select>
 
                             <app-form-filed-error [form-control]="resourceForm.controls.categoryTypeCode"></app-form-filed-error>
@@ -44,7 +42,7 @@
                     <app-server-error-messages></app-server-error-messages>
 
                     <div class="row">
-                        <div class="col-md-6 text-right">
+                        <div class="col-md text-left">
                             <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
                                 {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
                             </button>

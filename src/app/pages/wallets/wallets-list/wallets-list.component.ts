@@ -5,6 +5,7 @@ import { Notification } from 'src/app/shared/scripts/notification';
 import { Wallet } from "../shared/wallet.model";
 import { WalletService } from '../shared/wallet.service';
 
+
 @Component({
   selector: 'app-wallets-list',
   templateUrl: './wallets-list.component.html',
@@ -29,10 +30,6 @@ export class WalletsListComponent extends BaseResourceListComponent<Wallet> impl
   
   protected actionsForSuccessDelete(resource: Wallet){
     Notification.showNotification('Wallet ' + resource.name + ' was removed.', 'pe-7s-trash', 'info', 'top', 'center');
-    
     super.actionsForSuccessDelete(resource);
   }
-
-  
-
 }

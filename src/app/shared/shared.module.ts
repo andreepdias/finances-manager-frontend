@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaseResourceFormComponent } from './components/base-resource-form/base-resource-form.component';
-import { BaseResourceListComponent } from './components/base-resource-list/base-resource-list.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FormFiledErrorComponent } from './components/form-filed-error/form-filed-error.component';
 import { ServerErrorMessagesComponent } from './components/server-error-messages/server-error-messages.component';
@@ -10,36 +9,43 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { IMaskModule } from 'angular-imask';
-
+import { CalendarModule } from "primeng/calendar";
+import { ChartModule } from "primeng/chart";
+import { CurrencyUtil } from './util/currency.util';
 
 
 @NgModule({
   declarations: [
-
   FormFiledErrorComponent,
-
   ServerErrorMessagesComponent,
-
   PageHeaderComponent,
-
-  PaginationComponent],
+  PaginationComponent
+],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CalendarModule,
+    ChartModule,
+    FormsModule
 
   ], exports: [
     CommonModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule,
     IMaskModule,
+    CalendarModule,
+    ChartModule,
+    FormsModule,
     
     ServerErrorMessagesComponent,
     FormFiledErrorComponent,
     PageHeaderComponent,
-    PaginationComponent
+    PaginationComponent,
   ]
 })
 export class SharedModule { }

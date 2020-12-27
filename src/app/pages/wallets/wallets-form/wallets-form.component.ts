@@ -38,6 +38,16 @@ export class WalletsFormComponent extends BaseResourceFormComponent<Wallet> impl
     }
   }
 
+  protected createResource(){
+    this.resourceForm.value.amount = this.unformatCurrency(this.resourceForm.value.amount);
+    return super.createResource();
+  }
+
+  protected updateResource(){
+    this.resourceForm.value.amount = this.unformatCurrency(this.resourceForm.value.amount);
+    return super.updateResource();
+  }
+
   protected actionsForSuccess(wallet: Wallet){
     const message: string = (this.currentAction == 'new') ? 
     'Success creating a new wallet ' + wallet.name + '!' : 

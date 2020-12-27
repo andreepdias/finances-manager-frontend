@@ -14,11 +14,18 @@ import { CategoryService } from '../shared/category.service';
 })
 export class CategoryFormComponent extends BaseResourceFormComponent<Category> implements OnInit, AfterContentChecked {
 
+  categoryTypes: any;
+
   constructor(
     protected service: CategoryService,
     protected injector: Injector
   ) {
     super(new Category(), service, Category.fromJSON, injector);
+  }
+  
+  ngOnInit(){
+    super.ngOnInit();
+    this.loadCategoryTypes();
   }
 
   protected buildForm(){
@@ -59,8 +66,8 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> i
     super.actionsForError(error);
   }
 
-  get typeOptions(): Array<any> {
-    return Object.entries(Category.types).map(
+  loadCategoryTypes(){
+    let types = Object.entries(Category.types).map(
       ([value, text]) => {
         return {
           text: text,
@@ -68,5 +75,6 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> i
         };
       }
     );
+    return this.categoryTypes = types;
   }
 }

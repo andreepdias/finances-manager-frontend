@@ -10,7 +10,7 @@ import { TransactionService } from '../shared/transaction.service';
   styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent extends BaseResourceListComponent<Transaction> implements OnInit {
-
+  
   constructor(
     protected service: TransactionService
   ) {

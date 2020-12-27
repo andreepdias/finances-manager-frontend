@@ -65,20 +65,23 @@ export class BaseResourceService<T extends BaseResourceModel> {
     );
   }
 
+  protected handleError(error: any): Observable<any>{
+    return throwError(error);
+  }
+
+  protected jsonToResources(json: any){
+    const resources: T[] = [];
+    json.forEach(
+      (element: T) => resources.push(element)
+    );
+    return resources;
+  }
+
   
   /** --- PRIVATE METHODS --- */
 
   private jsonToResource(jsonData: any){
     return this.jsonToResourceFn(jsonData);
-  }
-
-  private jsonToResources(json: any){
-    const resources: T[] = [];
-    console.log('Converting to model: ', json);
-    json.forEach(
-      (element: T) => resources.push(element)
-    );
-    return resources;
   }
 
   private jsonPageToResources(jsonPage: any){
@@ -88,10 +91,6 @@ export class BaseResourceService<T extends BaseResourceModel> {
     );
     jsonPage.content = resources;
     return jsonPage;
-  }
-
-  private handleError(error: any): Observable<any>{
-    return throwError(error);
   }
 
 }
