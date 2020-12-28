@@ -29,6 +29,23 @@
                             <app-form-filed-error [form-control]="resourceForm.controls.amount"></app-form-filed-error>
                         </div>
                     </div>
+                    <div class="row">
+
+                        <!-- icon -->
+                        <div class="form-group col-md-2" style="max-width: 130px;">
+                            <label for="icon">Choose an icon</label><br>
+                            <p-listbox [options]="icons" formControlName="icon"  optionValue="code" [listStyle]="{'max-height':'200px'}">
+                                <ng-template let-icon pTemplate="item">
+                                        <div>
+                                            <i class="material-icons">{{icon.code}}</i>
+                                        </div>
+                                </ng-template>
+                            </p-listbox>
+                            <app-form-filed-error [form-control]="resourceForm.controls.icon"></app-form-filed-error>
+
+
+                        </div>
+                    </div>
 
                     <app-server-error-messages></app-server-error-messages>
 

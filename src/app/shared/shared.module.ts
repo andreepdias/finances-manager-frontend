@@ -10,8 +10,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { IMaskModule } from 'angular-imask';
 import { CalendarModule } from "primeng/calendar";
+import { DropdownModule } from "primeng/dropdown";
 import { ChartModule } from "primeng/chart";
-import { CurrencyUtil } from './util/currency.util';
+import { ListboxModule } from "primeng/listbox";
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { CurrencyUtil } from './util/currency.util';
     NgxPaginationModule,
     CalendarModule,
     ChartModule,
-    FormsModule
+    FormsModule,
+    DropdownModule,
+    ListboxModule
 
   ], exports: [
     CommonModule,
@@ -41,6 +44,8 @@ import { CurrencyUtil } from './util/currency.util';
     CalendarModule,
     ChartModule,
     FormsModule,
+    DropdownModule,
+    ListboxModule,
     
     ServerErrorMessagesComponent,
     FormFiledErrorComponent,

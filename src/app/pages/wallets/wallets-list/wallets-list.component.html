@@ -1,3 +1,14 @@
+<!-- account_balance
+account_balance_wallet
+monetization_on
+credit_card 
+local_atm
+card_travel
+favorite_border
+grade
+savings
+ -->
+
 <div class="row">
     <div class="col-md-12">
         <div class="card strpied-tabled-with-hover">
@@ -10,36 +21,34 @@
             button-icon="add_circle"
             button-text="New Wallet"
             ></app-page-header>
+
+           
             
-            <div class="card-body table-full-width table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <th>Name</th>
-                        <th class="text-right">Amount</th>
-                        <th class="text-right">Actions</th>
-                        <th>&nbsp;</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let wallet of resources | paginate: paginationConfig">
-                            <td>
-                                <span>{{ wallet.name }}</span>
-                            </td>   
-                            <td class="text-right">
-                                <span>{{ currencyUtil.format(wallet.amount) }}</span>
-                            </td>
-                            <td class="td-actions text-right">
-                                <button routerLink="/wallets/{{ wallet.id }}/edit" class="btn  btn-rose btn-fab btn-fab-mini btn-round">
-                                    <i class="material-icons">edit</i>
-                                  </button>
-                                  <button (click)="deleteResource(wallet)" class="btn btn-fab btn-fab-mini btn-round ml-1">
-                                    <i class="material-icons">delete</i>
-                                  </button>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-                
+            <div class="custom-card-body">
+
+                <div class="row">
+                    <div class="col-md">
+                        <div class="custom-card-deck">
+                            <div class="col-md-2 custom-card" *ngFor="let wallet of resources">
+                                <div class="custom-card-body">
+                                    <div class="row" style="align-items: center; vertical-align: auto;">                                        
+                                        <i style="margin-right: auto;" class="material-icons">{{ wallet.icon }}</i>
+                                        <h4 style="position: absolute; padding-left: 13%;" class="custom-card-title">{{ wallet.name }}</h4>
+                                        <button routerLink="/wallets/{{ wallet.id }}/edit" class="btn  btn-info btn-fab btn-fab-mini btn-round ">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </div>
+                                    <div class="car-text">
+                                        <h6 class="text-muted text-center">Amount:</h6>
+                                        <h5 class="text-center">{{ currencyUtil.format(wallet.amount) }}</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <app-pagination
                 [pagination-config]="paginationConfig"
                 (on-change-page-event)="onPaginationPageChange($event)"

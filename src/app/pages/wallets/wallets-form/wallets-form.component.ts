@@ -12,6 +12,8 @@ import { WalletService } from '../shared/wallet.service';
 })
 export class WalletsFormComponent extends BaseResourceFormComponent<Wallet> implements OnInit {
 
+  icons = Wallet.icons;
+
   constructor(
     protected injector: Injector,
     protected service: WalletService
@@ -23,7 +25,8 @@ export class WalletsFormComponent extends BaseResourceFormComponent<Wallet> impl
     this.resourceForm = this.formBuilder.group({
       id: [ null ],
       name: [ null, [ Validators.required ] ],
-      amount: [ null, [ Validators.required ] ]
+      amount: [ null, [ Validators.required ] ],
+      icon: [ null, [ Validators.required ] ]
     });
   }
 
