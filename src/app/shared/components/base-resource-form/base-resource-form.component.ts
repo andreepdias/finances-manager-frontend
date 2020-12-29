@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { BaseResourceModel } from '../../models/base-resource.model';
+import { Notification } from '../../scripts/notification';
 import { BaseResourceService } from '../../services/base-resource-service.service';
 
 declare var $:any;
@@ -35,7 +36,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
 
   constructor(
-    protected resource: T,
+    public resource: T,
     protected service: BaseResourceService<T>,
     protected jsonToResourceFn: (jsonData: any) => T,
     protected injector: Injector
@@ -83,24 +84,40 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     );
   }
 
-  protected actionsForSuccess(resource: T){
+  private navigateToParent(){
     const baseComponentPath: string = (this.route.snapshot.parent) ? this.route.snapshot.parent.url[0].path : '';
 
     if(baseComponentPath){
       this.router.navigateByUrl(baseComponentPath);
     }
-      // if(this.currentAction == 'new'){
-      //   this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
-      //     () => this.router.navigate([baseComponentPath, resource.id, 'edit'])
-      //   );
-      // }else{
-      //   this.router.navigateByUrl(baseComponentPath);
-      // }
+  }
+
+  protected actionsForSuccess(resource: T){
+    this.navigateToParent();
   }
 
   protected actionsForError(error: any){
     this.submittingForm = false;
     this.serverErrorMessages = error.error.errors;
+  }
+
+  deleteResource(resource: T){
+    this.service.delete(resource).subscribe(
+      () => this.actionsForSuccessDelete(resource),
+      (error) => this.actionsForFailedDelete(error)
+    );
+  }
+
+  protected actionsForSuccessDelete(resource: T){
+    this.navigateToParent();
+  }
+
+  protected actionsForFailedDelete(error: any){
+    const errorMessages = error.error.errors;
+
+    for(let error of errorMessages){
+      Notification.showNotification(error, 'pe-7s-close-circle', 'danger', 'top', 'center');
+    }
   }
 
   get notificationSuccessIcon(): string{

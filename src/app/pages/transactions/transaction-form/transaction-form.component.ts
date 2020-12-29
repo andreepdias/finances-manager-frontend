@@ -17,10 +17,8 @@ declare var $:any;
 })
 export class TransactionFormComponent extends BaseResourceFormComponent<Transaction> implements OnInit {
 
-  categories: Category[] = [];
+  categories: any = [];
   wallets: Wallet[] = [];
-  
-  defaultDate: string = '';
 
   constructor(
     protected injector: Injector,
@@ -52,21 +50,41 @@ export class TransactionFormComponent extends BaseResourceFormComponent<Transact
 
   private loadCategories(){
     return this.categoryService.getAll().subscribe(
-      categories => this.categories = categories,
+      categories => this.buildCategoriesDropDown(categories),
       error => console.log('Error loading categories in transaction form: ', error)
-      );
-    }
+    );
+  }
+
+  private buildCategoriesDropDown(categories: Category[]){
+    let categoriesDropDown = [];
+    let types = Object.entries(Category.types);
     
-    private loadWallets(){
-      return this.walletService.getAll().subscribe(
-        wallets => this.wallets = wallets,
-        error => console.log('Error loading wallets in transaction form: ', error)
+    for(let type in types){
+      let typeName = types[type][1];
+
+      let categoriesName = categories.filter(c => c.categoryTypeName == typeName).map(c => ({categoryName: c.name, categoryId: c.id }) );
+      let categoryType = {
+        typeName: typeName,
+        categories: categoriesName
+      };
+
+      categoriesDropDown.push(categoryType);
+      this.categories = categoriesDropDown;
+    }
+  }
+
+    
+  private loadWallets(){
+    return this.walletService.getAll().subscribe(
+      wallets => this.wallets = wallets,
+      error => console.log('Error loading wallets in transaction form: ', error)
     );
   }
 
   private setDefaultDate(){
     let today = new Date();
-    this.defaultDate = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    let todayString = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    this.resourceForm.patchValue({date: todayString});
   }
 
   protected setPageTitle(){

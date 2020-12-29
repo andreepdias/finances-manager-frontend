@@ -32,7 +32,7 @@ import { ListboxModule } from "primeng/listbox";
     ChartModule,
     FormsModule,
     DropdownModule,
-    ListboxModule
+    ListboxModule,
 
   ], exports: [
     CommonModule,

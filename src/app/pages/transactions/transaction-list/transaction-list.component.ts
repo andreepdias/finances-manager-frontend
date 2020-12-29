@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Notification } from 'src/app/shared/scripts/notification';
 import { Transaction } from '../shared/transaction.model';
@@ -10,6 +11,8 @@ import { TransactionService } from '../shared/transaction.service';
   styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent extends BaseResourceListComponent<Transaction> implements OnInit {
+
+  form:  FormGroup = new FormGroup({});
   
   constructor(
     protected service: TransactionService

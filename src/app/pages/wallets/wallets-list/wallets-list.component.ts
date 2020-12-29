@@ -26,6 +26,7 @@ export class WalletsListComponent extends BaseResourceListComponent<Wallet> impl
 
   private configurePagination(){
     this.paginationConfig.id = 'wallets-list-component';
+    this.paginationConfig.itemsPerPage = 24;
   }
   
   protected actionsForSuccessDelete(resource: Wallet){

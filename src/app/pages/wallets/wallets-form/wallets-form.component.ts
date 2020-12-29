@@ -69,5 +69,10 @@ export class WalletsFormComponent extends BaseResourceFormComponent<Wallet> impl
 
     super.actionsForError(error);
   }
+  
+  protected actionsForSuccessDelete(resource: Wallet){
+    Notification.showNotification('Wallet ' + resource.name + ' was removed.', 'pe-7s-trash', 'info', 'top', 'center');
+    super.actionsForSuccessDelete(resource);
+  }
 
 }

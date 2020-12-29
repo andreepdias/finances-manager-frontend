@@ -51,8 +51,14 @@
 
                     <div class="row">
                         <div class="col-md text-left">
-                            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-danger">
+                            <button [disabled]="submittingForm || resourceForm.invalid" type="submit" class="btn btn-primary">
                                 {{ this.currentAction == 'new' ? 'Create' : 'Edit' }}
+                            </button>
+                        </div>
+
+                        <div class="col-md text-right" *ngIf="currentAction == 'edit'">
+                            <button (click)="deleteResource(resource)" [disabled]="submittingForm || resourceForm.invalid" type="button" class="btn btn-danger">
+                                Delete
                             </button>
                         </div>
                     </div>

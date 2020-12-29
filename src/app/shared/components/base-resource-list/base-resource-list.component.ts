@@ -27,16 +27,16 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
   ngOnInit(): void {
     this.loadPageResources(this.paginationConfig.currentPage - 1, this.paginationConfig.itemsPerPage);
   }
+  
+  onPaginationPageChange(event: number){
+    this.loadPageResources(event - 1, this.paginationConfig.itemsPerPage);
+  }
 
   deleteResource(resource: T){
     this.service.delete(resource).subscribe(
       () => this.actionsForSuccessDelete(resource),
       (error) => this.actionsForFailedDelete(error)
     );
-  }
-  
-  onPaginationPageChange(event: number){
-    this.loadPageResources(event - 1, this.paginationConfig.itemsPerPage);
   }
 
   protected actionsForSuccessDelete(resource: T){

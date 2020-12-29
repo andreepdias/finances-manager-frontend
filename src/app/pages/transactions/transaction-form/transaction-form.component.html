@@ -28,10 +28,21 @@
                     <div class="row">
                         <!-- category -->
                         <div class="form-group col-md-4">
-                            <label for="categoryId">Category</label>
-                            <select formControlName="categoryId" class="form-control">
-                                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-                            </select>
+                            <label for="categoryId">Category</label><br>
+
+                            <p-dropdown 
+                            [options]="categories" 
+                            formControlName="categoryId" 
+                            [group]="true"
+                            optionGroupLabel="typeName"
+                            optionGroupChildren="categories"
+                            optionLabel="categoryName" 
+                            optionValue="categoryId" 
+                            placeholder=""
+                            autoWidth="false"
+                            scrollHeight="300px"
+                            [style]="{'width':'100%'}">
+                            </p-dropdown><br>
 
                             <app-form-filed-error [form-control]="resourceForm.controls.categoryId"></app-form-filed-error>
                         </div>
@@ -39,9 +50,28 @@
                         <!-- wallet -->
                         <div class="form-group col-md-4">
                             <label for="Tipo">Wallet</label>
-                            <select formControlName="walletId" class="form-control">
-                                <option *ngFor="let wallet of wallets" [value]="wallet.id">{{ wallet.name }}</option>
-                            </select>
+                            
+                            <p-dropdown 
+                            [options]="wallets"
+                            formControlName="walletId"
+                            optionLabel="name"
+                            optionValue="id" 
+                            placeholder=" "
+                            autoWidth="false"
+                            [style]="{'width':'100%', 'height': '41%'}">
+                            <ng-template let-wallet pTemplate="selectedItem">
+                                <div>
+                                    <i class="material-icons">{{ wallet.icon }}</i>
+                                    <span style="position: relative; bottom: 6px;">&nbsp; {{wallet.name}}</span>
+                                </div>  
+                            </ng-template>
+                            <ng-template let-wallet pTemplate="item">
+                                    <div>
+                                        <i class="material-icons">{{ wallet.icon }}</i>
+                                        <span style="position: relative; bottom: 6px;">&nbsp; {{wallet.name}}</span>
+                                    </div>
+                            </ng-template>
+                            </p-dropdown><br>
 
                             <app-form-filed-error [form-control]="resourceForm.controls.walletId"></app-form-filed-error>
                         </div>
@@ -58,7 +88,6 @@
                         <div class="form-group col-md-2">
                             <label for="date">Date</label>
                             <p-calendar id="date" 
-                            [(ngModel)]="defaultDate"
                             formControlName="date" 
                             inputStyleClass="form-control text-right"
                             [style]="{'width':'100%'}" 
@@ -68,6 +97,12 @@
                             </p-calendar><br>
                             
                             <app-form-filed-error [form-control]="resourceForm.controls.date"></app-form-filed-error>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            
                         </div>
                     </div>
 
