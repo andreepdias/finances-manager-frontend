@@ -1,27 +1,29 @@
-# NewFrontend
+# FitnessManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.3.
+Aplicação de gerenciamento e controle de finanças pessoais desenvolvida para praticar conhecimentos de Angular e Spring Boot. O backend pode ser encontrado no repositório https://github.com/andreepdias/finances-manager-backend
 
-## Development server
+O sistema pode ser acessado em https://andreepdias.github.io/finances-manager-frontend. A primeira requisição pode demorar devido ao fato da API ser executada em um plano gratuito do Heroku, que necessita iniciar a máquina virtual.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tecnologias utilizadas
 
-## Code scaffolding
+Esta aplicação frontend foi desenvolvida utilizando Angular 11 e Boostrap 4.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A base do layout é um template em bootstrap encontrado em https://www.creative-tim.com/product/argon-dashboard. Diversos componentes da biblioteca PrimeNG  https://www.primefaces.org/primeng/ também foram utilizados.
 
-## Build
+Dependências como currency-formatter, ngx-pagination, chart.js, angular-imask e material-icons também são usadas neste projeto.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Screenshots
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<div style="text-align:center">
+<img src="https://i.imgur.com/f6tfTnH.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/ukB5HpF.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/79i49H7.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/NYT8xjD.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/O2NJAea.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/Y7imrwy.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/J9DEv03.png" width="1000px" style="border: 1px solid #eee;"/>
+<img src="https://i.imgur.com/bJcGBFH.png" width="1000px" style="border: 1px solid #eee;"/>
+</div>
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
