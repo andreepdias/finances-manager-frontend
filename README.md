@@ -1,4 +1,4 @@
-# FinancesManager
+# Finances Manager Frontend
 
 Aplicação de gerenciamento e controle de finanças pessoais desenvolvida para praticar conhecimentos de Angular e Spring Boot. O backend pode ser encontrado no repositório https://github.com/andreepdias/finances-manager-backend
 
